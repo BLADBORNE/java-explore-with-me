@@ -3,7 +3,7 @@ package ru.practicum.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.practicum.model.Stats;
+import ru.practicum.model.EndpointHit;
 import ru.practicum.model.ViewStats;
 import ru.practicum.repository.StatsRepository;
 
@@ -17,10 +17,10 @@ public class StatsServiceImpl implements StatsService {
     private final StatsRepository statsRepository;
 
     @Override
-    public Stats createNewStats(Stats stats) {
+    public EndpointHit createNewStats(EndpointHit hit) {
         log.info("Получен запрос на создание нового события");
 
-        return statsRepository.save(stats);
+        return statsRepository.save(hit);
     }
 
     @Override

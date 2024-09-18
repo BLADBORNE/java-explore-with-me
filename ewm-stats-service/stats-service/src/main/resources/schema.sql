@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS
-    stats CASCADE;
+    hits CASCADE;
 
-CREATE TABLE IF NOT EXISTS stats
+CREATE TABLE IF NOT EXISTS hits
 (
     id           INTEGER GENERATED AlWAYS AS IDENTITY PRIMARY KEY NOT NULL,
     app          VARCHAR(50)                                      NOT NULL,

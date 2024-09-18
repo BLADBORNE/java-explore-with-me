@@ -3,16 +3,16 @@ package ru.practicum.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import ru.practicum.model.Stats;
+import ru.practicum.model.EndpointHit;
 import ru.practicum.model.ViewStats;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public interface StatsRepository extends JpaRepository<Stats, Integer> {
+public interface StatsRepository extends JpaRepository<EndpointHit, Integer> {
     @Query("SELECT new ru.practicum.model.ViewStats(st.app, st.uri, COUNT(st.ip)) " +
-            "FROM Stats AS st " +
+            "FROM EndpointHit AS st " +
             "WHERE st.uri IN :uri " +
             "  AND st.timestamp BETWEEN :start AND :end " +
             "GROUP BY st.app, st.uri " +
@@ -21,7 +21,7 @@ public interface StatsRepository extends JpaRepository<Stats, Integer> {
     List<ViewStats> getViewStats(List<String> uri, LocalDateTime start, LocalDateTime end);
 
     @Query("SELECT new ru.practicum.model.ViewStats(st.app, st.uri, COUNT(DISTINCT st.ip))" +
-            "FROM Stats AS st " +
+            "FROM EndpointHit AS st " +
             "WHERE st.uri IN :uri" +
             "  AND st.timestamp BETWEEN :start AND :end " +
             "GROUP BY st.app, st.uri " +
@@ -30,7 +30,7 @@ public interface StatsRepository extends JpaRepository<Stats, Integer> {
 
 
     @Query("SELECT new ru.practicum.model.ViewStats(st.app, st.uri, COUNT(st.ip)) " +
-            "FROM Stats AS st " +
+            "FROM EndpointHit AS st " +
             "WHERE st.timestamp BETWEEN :start AND :end " +
             "GROUP BY st.app, st.uri " +
             "ORDER BY COUNT(st.ip) DESC")
@@ -38,7 +38,7 @@ public interface StatsRepository extends JpaRepository<Stats, Integer> {
     List<ViewStats> getAllViewStats(LocalDateTime start, LocalDateTime end);
 
     @Query("SELECT new ru.practicum.model.ViewStats(st.app, st.uri, COUNT(DISTINCT st.ip))" +
-            "FROM Stats AS st " +
+            "FROM EndpointHit AS st " +
             "WHERE st.timestamp BETWEEN :start AND :end " +
             "GROUP BY st.app, st.uri " +
             "ORDER BY COUNT(DISTINCT st.ip) DESC")
