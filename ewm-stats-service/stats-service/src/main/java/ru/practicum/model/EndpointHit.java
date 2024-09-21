@@ -10,11 +10,10 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 
 @Getter
-@NoArgsConstructor
 @Entity
 @Table(name = "hits")
 public class EndpointHit {

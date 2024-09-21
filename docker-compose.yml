@@ -30,6 +30,7 @@ services:
     depends_on:
       - ewm-db
     environment:
+      - CLIENT_URL=http://stats-server:9090
       - HOST=ewm-db
       - PORT=5432
       - POSTGRES_DB=explore_ewm
