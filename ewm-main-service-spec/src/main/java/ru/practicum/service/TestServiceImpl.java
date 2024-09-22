@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import ru.practicum.client.StatsClient;
 import ru.practicum.dto.EndpointHitDto;
+import ru.practicum.dto.ViewStatsDto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -25,5 +27,10 @@ public class TestServiceImpl implements TestService {
         endpointHit.setTimestamp(LocalDateTime.now());
 
         return statsClient.createHit(endpointHit);
+    }
+
+    @Override
+    public Mono<List<ViewStatsDto>> getHitStatsTest() {
+        return statsClient.getHitStats(LocalDateTime.now().minusHours(2), LocalDateTime.now(), List.of("/test"), null);
     }
 }
