@@ -1,14 +1,48 @@
 services:
   stats-server:
+    build: ./ewm-stats-service/stats-service
     ports:
       - "9090:9090"
-
+      - "9095:9095"
+    depends_on:
+      - stats-db
+    environment:
+      - HOST=stats-db
+      - PORT=5432
+      - POSTGRES_DB=explore_stats
+      - POSTGRES_USER=explore_user
+      - POSTGRES_PASSWORD=qwerty
   stats-db:
+    ports:
+      - "5433:5432"
     image: postgres:16.1
-
+    volumes:
+      - /var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=explore_stats
+      - POSTGRES_USER=explore_user
+      - POSTGRES_PASSWORD=qwerty
   ewm-service:
+    build: ./ewm-main-service-spec
     ports:
       - "8080:8080"
-
+      - "8085:8085"
+    depends_on:
+      - ewm-db
+    environment:
+      - CLIENT_URL=http://stats-server:9090
+      - HOST=ewm-db
+      - PORT=5432
+      - POSTGRES_DB=explore_ewm
+      - POSTGRES_USER=explore_ewm_user
+      - POSTGRES_PASSWORD=qwerty
   ewm-db:
+    ports:
+      - "5434:5432"
     image: postgres:16.1
+    volumes:
+      - /var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=explore_ewm
+      - POSTGRES_USER=explore_ewm_user
+      - POSTGRES_PASSWORD=qwerty
