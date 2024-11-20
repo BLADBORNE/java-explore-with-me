@@ -5,7 +5,8 @@ import org.springframework.stereotype.Component;
 import ru.practicum.category.service.CategoryService;
 import ru.practicum.event.exception.EventCanNotBeUpdatedException;
 import ru.practicum.event.exception.EventDateValidationException;
-import ru.practicum.event.exception.EventStatusCanNotBeChanged;
+import ru.practicum.event.exception.EventStatusCanNotBeChangedException;
+import ru.practicum.event.exception.EventStatusCanNotBeChangedException;
 import ru.practicum.event.location.mapper.LocationMapper;
 import ru.practicum.event.location.service.LocationService;
 import ru.practicum.event.model.Event;
@@ -53,7 +54,7 @@ public class EventDateValidationService {
 
             String errorMessage = getErrorMessage(updateEventByUserDto, event);
 
-            throw new EventStatusCanNotBeChanged(errorMessage);
+            throw new EventStatusCanNotBeChangedException(errorMessage);
         }
     }
 
@@ -89,7 +90,7 @@ public class EventDateValidationService {
 
             String errorMessage = getErrorMessage(updateEventByAdminDto, event);
 
-            throw new EventStatusCanNotBeChanged(errorMessage);
+            throw new EventStatusCanNotBeChangedException(errorMessage);
         }
     }
 
