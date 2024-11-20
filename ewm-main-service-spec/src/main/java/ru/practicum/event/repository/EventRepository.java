@@ -38,19 +38,21 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
                                     LocalDateTime rangeStart, LocalDateTime rangeEnd, Pageable pageable);
 
     @Query("""
-         SELECT ev
-         FROM Event AS ev
-         WHERE (:categories IS NULL
-                OR ev.category.id IN :categories)
-           AND (:paid IS NULL
-                OR ev.paid = :paid)
-           AND ev.eventDate BETWEEN :rangeStart AND :rangeEnd
-           AND (LOWER(ev.annotation) LIKE CONCAT('%', :text, '%')
-                OR LOWER(ev.description) LIKE CONCAT('%', :text, '%'))
-           AND (:onlyAvailable = FALSE
-                OR (ev.participantLimit - ev.confirmedRequests) > 0)
-           AND ev.state = 'PUBLISHED'
-         """)
+            SELECT ev
+            FROM Event AS ev
+            WHERE (:categories IS NULL
+                   OR ev.category.id IN :categories)
+              AND (:paid IS NULL
+                   OR ev.paid = :paid)
+              AND ev.eventDate BETWEEN :rangeStart AND :rangeEnd
+              AND (LOWER(ev.annotation) LIKE CONCAT('%', :text, '%')
+                   OR LOWER(ev.description) LIKE CONCAT('%', :text, '%'))
+              AND (:onlyAvailable = FALSE
+                   OR (ev.participantLimit - ev.confirmedRequests) > 0)
+              AND ev.state = 'PUBLISHED'
+            """)
     List<Event> getAllEventsByUsers(String text, List<Integer> categories, Boolean paid, LocalDateTime rangeStart,
                                     LocalDateTime rangeEnd, Boolean onlyAvailable, Pageable pageable);
+
+    List<Event> getEventByIdIn(List<Integer> ids);
 }

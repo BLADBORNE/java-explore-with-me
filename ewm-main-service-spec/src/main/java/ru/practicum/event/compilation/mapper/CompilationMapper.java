@@ -1,6 +1,5 @@
 package ru.practicum.event.compilation.mapper;
 
-import jakarta.persistence.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.practicum.event.compilation.dto.CompilationDto;
@@ -16,20 +15,37 @@ import java.util.List;
 public class CompilationMapper {
     private final EventMapper eventMapper;
 
-    CompilationDto toDto(Compilation compilation) {
+    public CompilationDto toDto(Compilation compilation) {
         CompilationDto compilationDto = new CompilationDto();
 
         compilationDto.setId(compilation.getId());
         compilationDto.setTitle(compilation.getTitle());
-        compilationDto.setEvents(eventMapper.eventShortDtoList(compilation.getEvents()));
         compilationDto.setPinned(compilation.getPinned());
+
+        if (compilation.getEvents() != null) {
+            compilationDto.setEvents(eventMapper.eventShortDtoList(compilation.getEvents()));
+        }
 
         return compilationDto;
     }
 
-    Compilation fromDto(NewCompilationDto compilationDto, List<Event> events) {
+    public Compilation fromDto(NewCompilationDto compilationDto, List<Event> events) {
         Compilation compilation = new Compilation();
-        compilation.se
 
+        compilation.setTitle(compilationDto.getTitle());
+
+        if (compilationDto.getEvents() != null) {
+            compilation.setEvents(events);
+        }
+
+        if (compilationDto.getPinned() != null && compilationDto.getPinned()) {
+            compilation.setPinned(true);
+        }
+
+        return compilation;
+    }
+
+    public List<CompilationDto> toDtoList(List<Compilation> compilations) {
+        return compilations.stream().map(this::toDto).toList();
     }
 }

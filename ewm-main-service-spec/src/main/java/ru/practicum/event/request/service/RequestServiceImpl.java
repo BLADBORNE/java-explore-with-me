@@ -15,6 +15,7 @@ import ru.practicum.event.request.model.EventRequestStatusUpdateRequest;
 import ru.practicum.event.request.model.ParticipationUpdateRequestStatus;
 import ru.practicum.event.request.repository.RequestRepository;
 import ru.practicum.event.service.EventService;
+import ru.practicum.user.model.User;
 import ru.practicum.user.service.UserService;
 
 import java.time.LocalDateTime;
@@ -77,6 +78,19 @@ public class RequestServiceImpl implements RequestService {
     @Override
     public List<ParticipationRequest> getUserRequests(int userId) {
         return requestRepository.findByRequester(userId);
+    }
+
+    @Override
+    public List<ParticipationRequest> getUserRequestsInEvent(int userId, int eventId) {
+        User user = userService.getUserById(userId);
+
+        Event event = eventService.getEventById(eventId);
+
+        if (!event.getInitiator().getId().equals(userId)) {
+            throw new PermissionDeniedException("Только создатель может просмотреть все запросы на участие в событии");
+        }
+
+        return requestRepository.findByEvent(eventId);
     }
 
     @Override

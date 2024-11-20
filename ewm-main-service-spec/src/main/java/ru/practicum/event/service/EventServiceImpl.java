@@ -196,6 +196,11 @@ public class EventServiceImpl implements EventService {
         return allEvents;
     }
 
+    @Override
+    public List<Event> getEventsByIdIn(List<Integer> eventIds) {
+        return eventRepository.getEventByIdIn(eventIds);
+    }
+
     private void setHitsToEvents(List<Event> events) {
         List<ViewStatsDto> dtoList = client.getHitStats(LocalDateTime.now().minusYears(50), LocalDateTime.now()
                         .plusYears(50), events.stream().map(event -> "/events/" + event.getId()).toList(), true)

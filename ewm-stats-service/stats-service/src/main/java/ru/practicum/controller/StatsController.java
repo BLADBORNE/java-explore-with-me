@@ -36,7 +36,7 @@ public class StatsController {
 
         log.info("Успешно создано событие с uri = {}", mainHit.getUri());
 
-        return ResponseEntity.ok(mainHit);
+        return ResponseEntity.status(201).body(mainHit);
     }
 
     @GetMapping("/stats")

@@ -13,6 +13,8 @@ public interface RequestService {
 
     List<ParticipationRequest> getUserRequests(int userId);
 
+    List<ParticipationRequest> getUserRequestsInEvent(int userId, int eventId);
+
     EventRequestStatusUpdateRequest updateRequestStatus(int userId, int eventId, EventRequestStatusUpdateRequestDto
             requestDto);
 

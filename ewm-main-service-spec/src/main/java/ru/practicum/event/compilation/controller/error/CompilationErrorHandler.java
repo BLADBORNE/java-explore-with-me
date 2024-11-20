@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.NoSuchElementException;
 
-@RestControllerAdvice
+@RestControllerAdvice(value = "ru.practicum.event.compilation.controller")
 public class CompilationErrorHandler {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 

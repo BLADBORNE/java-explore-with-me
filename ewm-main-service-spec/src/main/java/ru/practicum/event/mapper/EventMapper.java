@@ -87,7 +87,7 @@ public class EventMapper {
         eventShortDto.setId(event.getId());
         eventShortDto.setTitle(event.getTitle());
         eventShortDto.setAnnotation(event.getAnnotation());
-        eventShortDto.setCategory(eventShortDto.getCategory());
+        eventShortDto.setCategory(categoryMapper.toDto(event.getCategory()));
         eventShortDto.setInitiator(userMapper.toUserShortDto(event.getInitiator()));
         eventShortDto.setEventDate(event.getEventDate());
         eventShortDto.setConfirmedRequests(event.getConfirmedRequests());

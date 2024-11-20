@@ -32,4 +32,6 @@ public interface EventService {
     List<Event> getAllEventsByAdmin(List<Integer> usersId, List<EventStatus> states, List<Integer> categoriesId,
                                     LocalDateTime rangeStart, LocalDateTime rangeEnd, Integer from,
                                     Integer size);
+
+    List<Event> getEventsByIdIn(List<Integer> eventIds);
 }

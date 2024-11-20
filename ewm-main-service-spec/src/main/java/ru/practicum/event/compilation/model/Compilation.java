@@ -8,6 +8,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import ru.practicum.event.model.Event;
@@ -16,7 +17,8 @@ import java.util.List;
 
 @Getter
 @Setter
-@Entity(name = "compilations")
+@Table(name = "compilations")
+@Entity
 public class Compilation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,4 +34,8 @@ public class Compilation {
     private List<Event> events;
     @Column(nullable = false)
     private Boolean pinned;
+
+    public Compilation() {
+        this.pinned = false;
+    }
 }

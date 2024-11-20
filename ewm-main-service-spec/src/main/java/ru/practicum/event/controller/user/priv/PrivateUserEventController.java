@@ -18,6 +18,7 @@ import ru.practicum.event.mapper.EventMapper;
 import ru.practicum.event.dto.UpdateEventByUserDto;
 import ru.practicum.event.request.dto.EventRequestStatusUpdateRequestDto;
 import ru.practicum.event.request.dto.EventRequestStatusUpdateResultDto;
+import ru.practicum.event.request.dto.ParticipationRequestDto;
 import ru.practicum.event.request.mapper.ParticipationRequestMapper;
 import ru.practicum.event.request.service.RequestService;
 import ru.practicum.event.service.EventService;
@@ -89,6 +90,22 @@ public class PrivateUserEventController {
         log.info("Успешно отправлены пользовтаелю с id = {} всего его события", userId);
 
         return ResponseEntity.ok(eventFullDto);
+    }
+
+    @GetMapping("/{eventId}/requests")
+    public ResponseEntity<List<ParticipationRequestDto>> getUserRequestsInEvent(
+            @PathVariable("userId") Integer userId,
+            @PathVariable(value = "eventId") Integer eventId
+    ) {
+        log.info("Получен запрос на просмотр всех заявок на участие в событии с id = {} от ользователя с id = {}",
+                eventId, userId);
+
+        List<ParticipationRequestDto> resultDto = requestMapper.toDtoList(requestService.getUserRequestsInEvent(userId,
+                eventId));
+
+        log.info("Успешно отправлены все заявки на участие в событии с id = {} от ользователя с id = {}", eventId, userId);
+
+        return ResponseEntity.ok(resultDto);
     }
 
     @PatchMapping("/{eventId}/requests")
