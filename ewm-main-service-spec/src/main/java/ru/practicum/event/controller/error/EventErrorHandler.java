@@ -34,7 +34,7 @@ public class EventErrorHandler {
                 e.getMessage(), LocalDateTime.now().format(formatter));
     }
 
-    @ExceptionHandler({EventDateValidationException.class, EventStatusCanNotBeChanged.class, PermissionDeniedException.class,
+    @ExceptionHandler({EventDateValidationException.class, EventStatusCanNotBeChangedException.class, PermissionDeniedException.class,
             EventCanNotBeUpdatedException.class, ParticipationRequestStatusCanNotBeChangedException.class,
             ParticipationLimitIsFullException.class})
     @ResponseStatus(HttpStatus.CONFLICT)

@@ -3,7 +3,7 @@ package ru.practicum.user.service.validation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import ru.practicum.user.exception.AlreadyExistException;
+import ru.practicum.user.exception.EmailAlreadyExistException;
 import ru.practicum.user.model.User;
 import ru.practicum.user.repository.UserRepository;
 
@@ -21,7 +21,7 @@ public class UserValidationService {
         if (user.isPresent()) {
             log.warn("Попытка создать пользователя с занятым email");
 
-            throw new AlreadyExistException(String.format("Пользователь с данным email %s уже есть", email));
+            throw new EmailAlreadyExistException(String.format("Пользователь с данным email %s уже есть", email));
         }
     }
 }
