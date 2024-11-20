@@ -29,18 +29,18 @@ public class StatsController {
 
     @PostMapping("/hit")
     @ResponseStatus(HttpStatus.CREATED)
-    public EndpointHitDto createHit(@RequestBody EndpointHit hit) {
-        log.info("Получен запрос на создания события по uri {}", hit);
+    public ResponseEntity<EndpointHitDto> createHit(@RequestBody EndpointHit hit) {
+        log.info("Получен запрос на создания события по uri {}", hit.getUri());
 
         EndpointHitDto mainHit = hitsMapper.toEndpointHitDto(statsService.createNewStats(hit));
 
         log.info("Успешно создано событие с uri = {}", mainHit.getUri());
 
-        return ResponseEntity.ok().body(mainHit).getBody();
+        return ResponseEntity.status(201).body(mainHit);
     }
 
     @GetMapping("/stats")
-    public List<ViewStatsDto> getStats(
+    public ResponseEntity<List<ViewStatsDto>> getStats(
             @RequestParam(value = "start") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
             @RequestParam(value = "end") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end,
             @RequestParam(value = "uris", required = false) List<String> uris,
@@ -53,6 +53,6 @@ public class StatsController {
 
         log.info("Упешно отправлены события пользователю");
 
-        return viewStatsDtoList;
+        return ResponseEntity.ok(viewStatsDtoList);
     }
 }
