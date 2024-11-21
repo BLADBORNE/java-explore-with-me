@@ -58,7 +58,7 @@ public class PrivateCommentController {
     }
 
     @DeleteMapping("/{comId}/{userId}")
-    public ResponseEntity<Void> updateComment(
+    public ResponseEntity<Void> deleteCommentById(
             @PathVariable(value = "comId") Integer comId,
             @PathVariable(value = "userId") Integer userId
     ) {
