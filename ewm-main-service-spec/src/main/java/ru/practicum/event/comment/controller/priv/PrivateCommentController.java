@@ -21,7 +21,7 @@ import ru.practicum.event.comment.service.CommentService;
 @RequestMapping("/comments")
 @Slf4j
 @RequiredArgsConstructor
-public class PrivateUserController {
+public class PrivateCommentController {
     private final CommentService commentService;
     private final CommentMapper commentMapper;
 
