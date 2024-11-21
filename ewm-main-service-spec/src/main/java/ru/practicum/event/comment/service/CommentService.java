@@ -1,6 +1,5 @@
 package ru.practicum.event.comment.service;
 
-import ru.practicum.event.comment.dto.CommentFullDto;
 import ru.practicum.event.comment.dto.NewCommentDto;
 import ru.practicum.event.comment.dto.UpdateCommentDto;
 import ru.practicum.event.comment.model.Comment;

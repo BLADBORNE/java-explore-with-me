@@ -8,6 +8,7 @@ import ru.practicum.event.model.Event;
 import ru.practicum.user.model.User;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Component
 public class CommentMapper {
@@ -33,5 +34,9 @@ public class CommentMapper {
         comment.setText(newCommentDto.getText());
 
         return comment;
+    }
+
+    public List<CommentFullDto> dtoList(List<Comment> comments) {
+        return comments.stream().map(this::toCommentFullDto).toList();
     }
 }

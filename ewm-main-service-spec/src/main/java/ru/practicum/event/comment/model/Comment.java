@@ -27,7 +27,7 @@ public class Comment {
     @ManyToOne
     private User initiator;
     @JoinColumn(nullable = false, name = "event_id")
-    @ManyToOne(F)
+    @ManyToOne
     private Event event;
     @Column(nullable = false)
     private String text;

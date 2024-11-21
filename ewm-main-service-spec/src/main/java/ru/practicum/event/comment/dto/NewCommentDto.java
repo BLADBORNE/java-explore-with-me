@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 public class NewCommentDto {
-    @NotBlank
+    @NotBlank(message = "Поле не может быть пустым")
     @Size(max = 2000)
     private String text;
 }
