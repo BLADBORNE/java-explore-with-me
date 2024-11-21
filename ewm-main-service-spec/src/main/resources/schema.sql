@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS locations
 CREATE TABLE IF NOT EXISTS events
 (
     id                 INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL,
-    title              VARCHAR(120)                                     NOT NULL CHECK (TRIM(annotation) <> ''),
+    title              VARCHAR(120)                                     NOT NULL CHECK (TRIM(title) <> ''),
     annotation         VARCHAR(2000)                                    NOT NULL CHECK (TRIM(annotation) <> ''),
     description        VARCHAR(7000)                                    NOT NULL,
     category_id        INTEGER                                          NOT NULL REFERENCES categories (id) ON DELETE CASCADE,
@@ -76,4 +76,13 @@ CREATE TABLE IF NOT EXISTS events_compilations
     compilation_id INTEGER NOT NULL REFERENCES compilations (id) ON DELETE CASCADE,
     event_id       INTEGER NOT NULL REFERENCES events (id) ON DELETE CASCADE,
     PRIMARY KEY (compilation_id, event_id)
-)
+);
+
+CREATE TABLE IF NOT EXISTS comments
+(
+    id             INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL,
+    user_id        INTEGER                                          NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+    event_id       INTEGER                                          NOT NULL REFERENCES events (id) ON DELETE CASCADE,
+    text           VARCHAR(2000)                                    NOT NULL,
+    published_date TIMESTAMP WITHOUT TIME ZONE                      NOT NULL
+);

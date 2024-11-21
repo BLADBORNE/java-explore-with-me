@@ -13,15 +13,16 @@ import ru.practicum.client.StatsClient;
 import ru.practicum.dto.EndpointHitDto;
 import ru.practicum.dto.ViewStatsDto;
 import ru.practicum.event.dto.NewEventDto;
-import ru.practicum.event.exception.*;
+import ru.practicum.event.dto.UpdateEventByUserDto;
+import ru.practicum.event.exception.DateRangeValidationException;
+import ru.practicum.event.exception.PermissionDeniedException;
 import ru.practicum.event.location.model.Location;
 import ru.practicum.event.location.service.LocationService;
 import ru.practicum.event.mapper.EventMapper;
 import ru.practicum.event.mapper.StatsMapper;
 import ru.practicum.event.model.Event;
-import ru.practicum.event.model.EventStatus;
-import ru.practicum.event.dto.UpdateEventByUserDto;
 import ru.practicum.event.model.EventSortStatus;
+import ru.practicum.event.model.EventStatus;
 import ru.practicum.event.model.admin.UpdateEventByAdminDto;
 import ru.practicum.event.repository.EventRepository;
 import ru.practicum.event.service.validation.EventDateValidationService;
@@ -29,9 +30,9 @@ import ru.practicum.user.model.User;
 import ru.practicum.user.service.UserService;
 
 import java.time.LocalDateTime;
-import java.util.NoSuchElementException;
-import java.util.List;
 import java.util.Comparator;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service

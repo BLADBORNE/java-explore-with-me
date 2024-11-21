@@ -21,7 +21,7 @@ public abstract class AbstractUpdateEvent {
     private LocationDto location;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @FutureOrPresent(message = "Дата не может быть в прошлом")
-    protected LocalDateTime eventDate;
+    private LocalDateTime eventDate;
     @PositiveOrZero(message = "Количество участниокв не может быть отрицательным")
     private Integer participantLimit;
     private Boolean requestModeration;
